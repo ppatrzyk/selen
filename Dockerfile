@@ -8,6 +8,7 @@ RUN apt-get update \
     python3-pip \
     epiphany-browser \
     webkit2gtk-driver \
+    xvfb \
     --no-install-recommends \
     && apt-get clean \
     && apt-get autoremove \
