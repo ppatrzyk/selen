@@ -16,7 +16,7 @@ RUN apt-get update \
 
 RUN pip3 install -r requirements.txt
 
-RUN xvfb :19 -screen 0 800x600x8 &
+RUN Xvfb :19 -screen 0 800x600x8 &
 ENV DISPLAY=":19"
 
 EXPOSE 5000
