@@ -13,11 +13,6 @@ TIMEOUT = os.environ.get('TIMEOUT') or 10000
 USERAGENT = os.environ.get('USERAGENT') or "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.1 Safari/605.1.15"
 PARTIAL_RESPONSE = os.environ.get('PARTIAL_RESPONSE') or 'true'
 
-# https://playwright.dev/python/docs/api/class-request#requestresource_type
-REQUEST_OK = ('document', 'script', 'fetch', 'xhr', )
-# TODO preserve these from original response somehow?
-TRASH_HEADER = ('content-length', 'content-encoding', 'server', 'date', )
-EMPTY_PAGE = '<html><head></head><body></body></html>'
 BROWSER_BUSY = False
 
 logger = logging.getLogger("uvicorn.error")
