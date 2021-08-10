@@ -22,16 +22,20 @@ logger.info('Configs:')
 for opt in CONF_OPTS:
     logger.info(f'{opt}: {eval(opt)}')
 
-class Epiphany(webdriver.WebKitGTK):
-    def __init__(self):
+class Epiphany(webdriver.Remote):
+    def __init__(self, url):
         options = webdriver.WebKitGTKOptions()
-        options.binary_location = 'epiphany'
+        options.binary_location = '/usr/bin/epiphany'
+        options.overlay_scrollbars_enabled = False
         options.add_argument('--automation-mode')
-        options.add_argument('--display=:19')
-        options.set_capability('browserName', 'Epiphany')
+        # options.set_capability('browserName', 'Epiphany')
+        # options.set_capability('browserVersion', '3.36.4')
+        # options.set_capability('browserVersion', 'ANY')
         # options.set_capability('version', '3.36.4')
-
-        webdriver.WebKitGTK.__init__(self, options=options, desired_capabilities={})
+        # options.set_capability('version', 'ANY')
+        capabilities = options.to_capabilities()
+        print(capabilities)
+        webdriver.Remote.__init__(self, command_executor=url, options=options, desired_capabilities=capabilities)
 
 def browser_busy():
     return BROWSER_BUSY
@@ -54,7 +58,7 @@ def fetch(url, proxy, ua, timeout, partial):
     try:
         BROWSER_BUSY = True
         # TODO improve this
-        browser = Epiphany()
+        browser = Epiphany('127.0.0.1:4444')
         browser.get(url)
         content = browser.page_source
         headers = selen_headers
